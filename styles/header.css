@@ -1,0 +1,173 @@
+/* ---------- header ---------- */
+
+.header {
+  --profile-size: 42px;
+  --nav-gap: clamp(0.75rem, 5vw, 5rem);
+  --logo-clearance: clamp(0.75rem, 3vw, 5rem);
+  --edge: clamp(0.75rem, 2vw, 2.5rem);
+
+  display: grid;
+  grid-template-columns: var(--profile-size) minmax(0, 1fr) auto minmax(0, 1fr) var(--profile-size);
+  align-items: center;
+  column-gap: var(--edge);
+  height: 100px;
+  padding-inline: var(--edge);
+  background-color: #f7f7f5;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.header::before {
+  content: "";
+  flex: 0 0 var(--profile-size);
+  order: -1;
+}
+
+/* ---------- nav ---------- */
+
+.navbar {
+  flex: 1;                       /* both groups take equal width */
+}
+
+.navbar ul {
+  display: flex;
+  align-items: center;
+  gap: var(--nav-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navbar:first-of-type { grid-column: 2; }
+.navbar:first-of-type ul { justify-content: flex-end; }
+
+.navbar:last-of-type { grid-column: 4; }
+.navbar:last-of-type ul { justify-content: flex-start; }
+
+.navbar li {
+  margin: 0;
+}
+
+.navbar a {
+  display: inline-block;
+  padding: 0.15em clamp(0.3em, 0.8vw, 0.5em);
+  color: #0a0a0a;
+  background-color: #e4e4e4;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.22) 22%, transparent 23%);
+  background-size: 3px 3px;
+  background-attachment: fixed;
+  font-family: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(0.65rem, 1.4vw, 1.1rem);
+  font-weight: 00;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  text-transform: lowercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.12s steps(2), color 0.12s steps(2);
+}
+
+.navbar a:hover,
+.navbar a:focus-visible {
+  color: #f7f7f5;
+  background-color: #050505;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.25) 22%, transparent 23%);
+}
+
+.navbar a:focus-visible {
+  outline: 2px solid #f7f7f5;
+  outline-offset: 2px;
+}
+
+/* ---------- logo ---------- */
+
+.slam-logo {
+  grid-column: 3;
+  display: grid;
+  place-items: center;
+  height: calc(100% - 10px);
+  width: auto;
+  flex: 0 0 auto;
+  aspect-ratio: 1;
+  margin-inline: var(--logo-clearance);
+  padding: 4px;
+}
+
+.slam-logo img {
+  display: block;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+/* ---------- profile ---------- */
+
+.profile-button {
+  grid-column: 5;
+  justify-self: end;
+  display: grid;
+  place-items: center;
+  width: var(--profile-size);
+  height: var(--profile-size);
+  padding: 0;
+  border: 2px solid #e4e4e4;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.profile-button svg {
+  width: 25px;
+  height: 25px;
+  fill: #e4e4e4;
+}
+
+.profile-button:hover {
+  background-color: #e4e4e4;
+}
+
+.profile-button:hover svg {
+  fill: #050505;
+}
+
+/* ---------- small screens ---------- */
+
+@media (max-width: 860px) {
+  .header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: auto;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .header::before { display: none; }
+
+  .navbar {
+    flex: 0 1 auto;
+  }
+
+  .navbar:first-of-type ul,
+  .navbar:last-of-type ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem 1.25rem;
+  }
+
+  .slam-logo {
+    order: -1;
+    height: auto;
+    width: 120px;
+    margin-inline: 0;
+  }
+
+  .profile-button {
+    position: relative;
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar a { transition: none; }
+}
