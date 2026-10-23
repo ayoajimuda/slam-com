@@ -55,7 +55,7 @@ export const urbanJavaExpanded = localFont({
 });
 
 export const urbanSyndicate = localFont({
-  src: "./fonts/urban-syndicate-sans-demo/UrbanSyndicateSansDEMO.otf",
+  src: "./fonts/urban-syndicate-sans-demo/Urban Syndicate Sans DEMO.otf",
   variable: "--font-urban-syndicate",
   display: "swap",
 });
