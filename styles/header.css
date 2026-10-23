@@ -1,173 +1,214 @@
-/* ---------- header ---------- */
+/* ---------- Header Styles ------------- */
 
 .header {
-  --profile-size: 42px;
-  --nav-gap: clamp(0.75rem, 5vw, 5rem);
-  --logo-clearance: clamp(0.75rem, 3vw, 5rem);
-  --edge: clamp(0.75rem, 2vw, 2.5rem);
+  --header-height: 107px;
+  --profile-size: 46px;
+  --ink: #0a0a0a;
+  --paper: #ffffff;
+  --line: #e4e4e4;
 
+  position: sticky;
+  top: 0;
+  z-index: 50;
   display: grid;
-  grid-template-columns: var(--profile-size) minmax(0, 1fr) auto minmax(0, 1fr) var(--profile-size);
+  grid-template-columns: 1fr auto 1fr;   /* logo | nav (true centre) | profile */
   align-items: center;
-  column-gap: var(--edge);
-  height: 100px;
-  padding-inline: var(--edge);
-  background-color: #f7f7f5;
-  z-index: 10;
-  overflow: hidden;
+  height: var(--header-height);
+  padding-right: clamp(1rem, 2vw, 2rem);
+  background-color: var(--paper);
 }
 
-.header::before {
-  content: "";
-  flex: 0 0 var(--profile-size);
-  order: -1;
-}
-
-/* ---------- nav ---------- */
-
-.navbar {
-  flex: 1;                       /* both groups take equal width */
-}
-
-.navbar ul {
-  display: flex;
-  align-items: center;
-  gap: var(--nav-gap);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.navbar:first-of-type { grid-column: 2; }
-.navbar:first-of-type ul { justify-content: flex-end; }
-
-.navbar:last-of-type { grid-column: 4; }
-.navbar:last-of-type ul { justify-content: flex-start; }
-
-.navbar li {
-  margin: 0;
-}
-
-.navbar a {
-  display: inline-block;
-  padding: 0.15em clamp(0.3em, 0.8vw, 0.5em);
-  color: #0a0a0a;
-  background-color: #e4e4e4;
-  background-image: radial-gradient(rgba(0, 0, 0, 0.22) 22%, transparent 23%);
-  background-size: 3px 3px;
-  background-attachment: fixed;
-  font-family: "Archivo", "Helvetica Neue", Arial, sans-serif;
-  font-size: clamp(0.65rem, 1.4vw, 1.1rem);
-  font-weight: 00;
-  line-height: 1.15;
-  letter-spacing: 0.01em;
-  text-transform: lowercase;
-  text-decoration: none;
-  white-space: nowrap;
-  transition: background-color 0.12s steps(2), color 0.12s steps(2);
-}
-
-.navbar a:hover,
-.navbar a:focus-visible {
-  color: #f7f7f5;
-  background-color: #050505;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.25) 22%, transparent 23%);
-}
-
-.navbar a:focus-visible {
-  outline: 2px solid #f7f7f5;
-  outline-offset: 2px;
-}
-
-/* ---------- logo ---------- */
-
+/* ---------------- Logo ----------------- */
 .slam-logo {
-  grid-column: 3;
-  display: grid;
-  place-items: center;
-  height: calc(100% - 10px);
-  width: auto;
-  flex: 0 0 auto;
-  aspect-ratio: 1;
-  margin-inline: var(--logo-clearance);
-  padding: 4px;
+  grid-column: 1;
+  justify-self: start;
+  align-self: stretch;                    /* fills the full header height */
+  height: 100%;
+}
+
+.slam-logo a {
+  display: block;
+  height: 100%;
 }
 
 .slam-logo img {
   display: block;
   height: 100%;
-  width: 100%;
-  object-fit: contain;
+  width: auto;                            /* keeps the logo's real proportions, no gaps */
 }
 
-/* ---------- profile ---------- */
+/* --------------- Navigation ----------------- */
+.navbar {
+  grid-column: 2;
+}
 
+.navbar ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 3.5vw, 4.5rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navbar a {
+  position: relative;
+  display: inline-block;
+  padding: 0.25rem 0;
+  color: var(--ink);
+  font-family: var(--font-urbanist), "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.navbar a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+
+.navbar a:hover::after,
+.navbar a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* -------------- Profile Button --------------------- */
 .profile-button {
-  grid-column: 5;
+  grid-column: 3;
   justify-self: end;
   display: grid;
   place-items: center;
   width: var(--profile-size);
   height: var(--profile-size);
   padding: 0;
-  border: 2px solid #e4e4e4;
+  border: 2px solid var(--ink);
   border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.profile-button svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--ink);
+  transition: fill 0.15s ease;
+}
+
+.profile-button:hover {
+  background-color: var(--ink);
+}
+
+.profile-button:hover svg {
+  fill: var(--paper);
+}
+
+/* -------------- Collapsible Menu Button --------------------- */
+.menu-button {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: var(--profile-size);
+  height: var(--profile-size);
+  padding: 11px;
+  border: 2px solid var(--ink);
   background: transparent;
   cursor: pointer;
 }
 
-.profile-button svg {
-  width: 25px;
-  height: 25px;
-  fill: #e4e4e4;
+.menu-button span {
+  display: block;
+  height: 2px;
+  background: var(--ink);
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.profile-button:hover {
-  background-color: #e4e4e4;
+/* turns into an X when open */
+.menu-button[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.menu-button[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.menu-button[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.header a:focus-visible,
+.header button:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
 }
 
-.profile-button:hover svg {
-  fill: #050505;
-}
-
-/* ---------- small screens ---------- */
-
-@media (max-width: 860px) {
+/* ------------------ Mobile Version ------------------------------------- */
+@media (max-width: 1024px) {
   .header {
+    --header-height: 90px;
+    padding-inline: 1rem;
+  }
+
+  .menu-button {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    height: auto;
-    padding: 1rem;
-    gap: 1rem;
-  }
-
-  .header::before { display: none; }
-
-  .navbar {
-    flex: 0 1 auto;
-  }
-
-  .navbar:first-of-type ul,
-  .navbar:last-of-type ul {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.75rem 1.25rem;
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
   }
 
   .slam-logo {
-    order: -1;
-    height: auto;
-    width: 120px;
-    margin-inline: 0;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: center;
+    padding-block: 6px;
   }
 
   .profile-button {
-    position: relative;
-    margin-left: 0;
+    grid-row: 1;
+  }
+
+  /* nav becomes a dropdown under the bar */
+  .navbar {
+    grid-column: 1 / -1;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
+    background: var(--paper);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--ink);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  }
+
+  .navbar.open {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .navbar a {
+    font-size: 1.05rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .navbar a { transition: none; }
+  .header *,
+  .header *::after {
+    transition: none !important;
+  }
 }

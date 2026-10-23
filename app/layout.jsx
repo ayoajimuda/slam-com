@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google";
+import { Urbanist } from 'next/font/google';
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import SWRegister from "@/components/SWRegister";
@@ -16,6 +17,12 @@ const geistMono = Geist_Mono({
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
+});
+
+const urbanist = Urbanist({
+    subsets: ['latin'],
+    weight: ['500', '600', '700'],
+    variable: '--font-urbanist',
 });
 
 export const metadata = {
@@ -36,7 +43,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-mono", jetbrainsMono.variable)}
+      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-mono", jetbrainsMono.variable, urbanist.variable)}
     >
       <body className="min-h-full flex flex-col">
         <SWRegister />
