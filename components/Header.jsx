@@ -7,6 +7,7 @@ import '../styles/header.css'
 const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false)
     const closeMenu = () => setMenuOpen(false)
+    const isLoggedIn = false;     // Placeholder until auth is added — set to true to preview the profile button
 
     return (
         <header className='header'>
@@ -37,11 +38,20 @@ const Header = () => {
                 </ul>
             </nav>
 
-            <button className='profile-button' aria-label='Profile'>
-                <svg viewBox="0 0 24 24">
-                    <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
-                </svg>
-            </button>
+            <div className='header-auth'>
+                {isLoggedIn ? (
+                    <Link href="/profile" className='profile-button' aria-label='Profile' onClick={closeMenu}>
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
+                        </svg>
+                    </Link>
+                ) : (
+                    <>
+                        <Link href="/login" className='btn btn-login' onClick={closeMenu}>Login</Link>
+                        <Link href="/signup" className='btn btn-signup' onClick={closeMenu}>Sign Up</Link>
+                    </>
+                )}
+            </div>
         </header>
     )
 }
