@@ -1,0 +1,145 @@
+.map-layout {
+  padding: 32px 6vw;
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+  gap: 2px;
+}
+
+/* ── Map ──────────────────────────────────────────────── */
+.map-map {
+  position: relative;
+  min-height: 570px;
+  overflow: hidden;
+  background-color: #d8d8d8;
+  background-image:
+    linear-gradient(28deg, transparent 46%, rgba(8, 8, 8, 0.08) 47%, rgba(8, 8, 8, 0.08) 49%, transparent 50%),
+    linear-gradient(105deg, transparent 46%, rgba(8, 8, 8, 0.1) 47%, rgba(8, 8, 8, 0.1) 49%, transparent 50%);
+  background-size: 110px 85px;
+}
+
+/* The dark diagonal "road" across the map. */
+.map-road {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  top: 42%;
+  height: 28px;
+  background: rgba(0, 0, 0, 0.72);
+  transform: rotate(-7deg);
+  border-top: 2px solid rgba(8, 8, 8, 0.28);
+  border-bottom: 2px solid rgba(8, 8, 8, 0.28);
+}
+
+/* Each spot's position comes from its x / y values, set inline. */
+.map-spot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.map-pin {
+  width: 38px;
+  height: 38px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: #080808;
+  border: 3px solid #f0ede8;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+/* The most recently added spot is highlighted. */
+.map-pin-latest {
+  background: var(--accent);
+}
+
+.map-spot-label {
+  position: absolute;
+  top: 44px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  background: #080808;
+  color: #f0ede8;
+  padding: 7px 9px;
+  font-family: var(--font-condensed);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.map-count {
+  position: absolute;
+  left: 18px;
+  bottom: 18px;
+  background: #080808;
+  color: #f0ede8;
+  padding: 10px 14px;
+  font-family: var(--font-condensed);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+
+/* ── Side panel ───────────────────────────────────────── */
+.map-panel {
+  background: var(--muted);
+  padding: 28px;
+}
+
+.map-heading {
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 400;
+  margin: 10px 0 12px;
+}
+
+.map-intro {
+  color: rgba(0, 0, 0, 0.6);
+  line-height: 1.5;
+}
+
+.map-input {
+  width: 100%;
+  background: var(--background);
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  padding: 15px;
+  font: inherit;
+  margin: 18px 0 8px;
+}
+
+.map-add-button {
+  width: 100%;
+}
+
+.map-feedback {
+  min-height: 20px;
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.map-nearby-label {
+  margin-top: 34px;
+}
+
+.map-nearby-row {
+  padding: 14px 0;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+}
+
+.map-nearby-type {
+  color: var(--accent);
+  margin: 0;
+}
+
+@media (max-width: 760px) {
+  .map-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .map-map {
+    min-height: 420px;
+  }
+}

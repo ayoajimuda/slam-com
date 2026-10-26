@@ -1,0 +1,48 @@
+.shell {
+  position: relative;
+  min-height: 100vh;
+  background: var(--background);
+}
+
+.shell-main {
+  transition: opacity 0.25s ease;
+}
+
+.shell-main-hidden {
+  opacity: 0;
+}
+
+/* Full-screen accent panel that slides over the page during navigation. */
+.shell-wipe {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: var(--accent);
+  pointer-events: none;
+}
+
+.shell-wipe-in {
+  animation: shell-wipe-in 0.42s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+
+.shell-wipe-out {
+  animation: shell-wipe-out 0.42s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+
+@keyframes shell-wipe-in {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes shell-wipe-out {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}

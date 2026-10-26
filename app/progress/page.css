@@ -1,0 +1,141 @@
+.progress-grid {
+  padding: 40px 6vw;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+  gap: 24px;
+}
+
+.progress-panel {
+  background: var(--muted);
+  padding: 30px;
+}
+
+.progress-stage-panel {
+  background: var(--muted);
+  padding: 32px;
+}
+
+.progress-heading {
+  font-family: var(--font-display);
+  font-size: 42px;
+  font-weight: 400;
+  margin: 10px 0;
+}
+
+.progress-stage-panel .progress-heading {
+  margin: 12px 0 4px;
+}
+
+.progress-summary {
+  color: rgba(0, 0, 0, 0.58);
+}
+
+.progress-bar {
+  height: 10px;
+  background: #2a2a2a;
+  margin: 26px 0 34px;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+/* ── Checklist ────────────────────────────────────────── */
+.progress-activity {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 0;
+  border: 0;
+  border-top: 1px solid var(--border);
+  background: transparent;
+  color: var(--foreground);
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+}
+
+.progress-activity[aria-pressed='true'] {
+  color: rgba(0, 0, 0, 0.42);
+}
+
+.progress-activity[aria-pressed='true'] .progress-activity-text {
+  text-decoration: line-through;
+}
+
+.progress-tick {
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--border);
+  color: var(--background);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.progress-activity[aria-pressed='true'] .progress-tick {
+  background: var(--accent);
+}
+
+/* ── Right-hand column ────────────────────────────────── */
+.progress-side {
+  display: grid;
+  gap: 24px;
+}
+
+.progress-next {
+  background: var(--accent);
+  color: var(--background);
+  padding: 30px;
+}
+
+.progress-next-label {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.progress-next-text {
+  line-height: 1.5;
+  max-width: 420px;
+}
+
+.progress-session-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.progress-session-time {
+  color: var(--accent);
+}
+
+/* ── Learning path ────────────────────────────────────── */
+.progress-path-section {
+  padding: 16px 6vw 40px;
+}
+
+.progress-path {
+  display: flex;
+  gap: 3px;
+  overflow-x: auto;
+}
+
+.progress-stage {
+  min-width: 180px;
+  padding: 20px;
+  background: var(--muted);
+  color: rgba(0, 0, 0, 0.45);
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+}
+
+.progress-stage-done {
+  background: var(--accent);
+  color: var(--background);
+}
