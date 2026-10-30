@@ -2,7 +2,6 @@ import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google";
 import { Urbanist } from 'next/font/google';
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import SWRegister from "@/components/sw-register.jsx";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,7 +45,6 @@ export default function RootLayout({ children }) {
       className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-mono", jetbrainsMono.variable, urbanist.variable)}
     >
       <body className="min-h-full flex flex-col">
-        <SWRegister />
         {children}
       </body>
     </html>
